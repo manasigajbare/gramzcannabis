@@ -370,10 +370,12 @@ export default function ProductDetailView({
               </button>
             </div>
           </div>
-          <div className="hide-scrollbar flex gap-3 overflow-x-auto pb-2">
-            {suggestions.map((p) => (
-              <ProductCard key={p.id} product={p} storeBasePath={storeBasePath} />
-            ))}
+          <div className="product-card-row-wrap">
+            <div className="product-card-row hide-scrollbar flex gap-3">
+              {suggestions.map((p) => (
+                <ProductCard key={p.id} product={p} storeBasePath={storeBasePath} />
+              ))}
+            </div>
           </div>
         </section>
       </div>

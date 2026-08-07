@@ -54,23 +54,25 @@ export default function ProductCard({
   return (
     <Link href={productUrl} className="product-card group block w-[240px] shrink-0 sm:w-[260px] lg:w-[280px]">
       <div className="flex h-full flex-col rounded-xl border border-gray-200 bg-white p-4 shadow-sm transition hover:border-gray-300 hover:shadow-md">
-        <div className="relative mb-5 aspect-square overflow-hidden rounded-lg bg-[#f7f7f7]">
-          {product.dealLabel && (
-            <span className="deal-ribbon absolute left-0 top-0 z-10">{product.dealLabel}</span>
-          )}
-          <ProductImage
-            src={product.image}
-            alt={product.name}
-            className="h-full w-full object-contain p-2 transition group-hover:scale-[1.02]"
-          />
-          <button
-            type="button"
-            onClick={handleAddToCart}
-            className="absolute -bottom-4 right-3 z-20 flex h-10 w-10 items-center justify-center rounded-full border border-gray-100 bg-white text-2xl font-light leading-none text-gray-900 shadow-md transition hover:scale-105"
-            aria-label={`Add ${product.name} to cart`}
-          >
-            +
-          </button>
+        <div className="product-card-media">
+          <div className="product-card-image">
+            {product.dealLabel && (
+              <span className="deal-ribbon absolute left-0 top-0 z-10">{product.dealLabel}</span>
+            )}
+            <ProductImage
+              src={product.image}
+              alt={product.name}
+              className="h-full w-full object-contain p-2 transition group-hover:scale-[1.02]"
+            />
+            <button
+              type="button"
+              onClick={handleAddToCart}
+              className="product-card-add"
+              aria-label={`Add ${product.name} to cart`}
+            >
+              +
+            </button>
+          </div>
         </div>
 
         <div className="mb-2 flex flex-wrap items-center gap-2">

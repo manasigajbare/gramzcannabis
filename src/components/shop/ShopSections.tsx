@@ -109,10 +109,10 @@ const SHOP_CATEGORIES = [
 
 export function CategoryCircles({ storeBasePath = "/michigan/monroe" }: { storeBasePath?: string }) {
   return (
-    <section className="border-b border-gray-200 bg-white py-6">
-      <div className="mx-auto max-w-7xl px-4">
-        <div className="mb-4 flex items-center justify-between">
-          <h2 className="text-base font-black text-gray-900 md:text-lg">What can we get you?</h2>
+    <section className="border-b border-gray-200 bg-white py-6 md:py-8">
+      <div className="mx-auto max-w-7xl px-4 md:px-6">
+        <div className="mb-5 flex items-center justify-between">
+          <h2 className="text-lg font-black text-gray-900 md:text-xl">What can we get you?</h2>
           <div className="flex gap-2">
             <button type="button" className="flex h-8 w-8 items-center justify-center rounded-full border border-gray-200 text-gray-500 hover:bg-gray-50" aria-label="Previous">
               ‹
@@ -122,17 +122,17 @@ export function CategoryCircles({ storeBasePath = "/michigan/monroe" }: { storeB
             </button>
           </div>
         </div>
-        <div className="hide-scrollbar flex gap-4 overflow-x-auto pb-1">
+        <div className="hide-scrollbar flex gap-4 overflow-x-auto pb-2 sm:gap-5 md:gap-6">
           {SHOP_CATEGORIES.map((cat) => (
             <Link
               key={cat.label}
               href={`${storeBasePath}#${cat.label.toLowerCase().replace(/\s+/g, "-")}`}
-              className="flex w-[72px] shrink-0 flex-col items-center gap-2 sm:w-[80px]"
+              className="category-circle-item flex flex-col items-center gap-2"
             >
-              <div className="flex h-16 w-16 items-center justify-center overflow-hidden rounded-full border border-gray-200 bg-gray-50 sm:h-[72px] sm:w-[72px]">
+              <div className="category-circle flex items-center justify-center">
                 <ProductImage src={cat.image} alt={cat.label} className="h-full w-full object-cover" />
               </div>
-              <span className="text-center text-[11px] font-semibold text-gray-800">{cat.label}</span>
+              <span className="category-circle-label">{cat.label}</span>
             </Link>
           ))}
         </div>
@@ -198,10 +198,12 @@ export function CategoryRow({
             <RowNavButtons onPrev={() => scroll("left")} onNext={() => scroll("right")} />
           </div>
         </div>
-        <div ref={scrollRef} className="hide-scrollbar flex gap-4 overflow-x-auto pb-2">
-          {products.map((product) => (
-            <ProductCard key={product.id} product={product} storeBasePath={storeBasePath} />
-          ))}
+        <div className="product-card-row-wrap">
+          <div ref={scrollRef} className="product-card-row hide-scrollbar flex gap-4">
+            {products.map((product) => (
+              <ProductCard key={product.id} product={product} storeBasePath={storeBasePath} />
+            ))}
+          </div>
         </div>
       </div>
     </section>
