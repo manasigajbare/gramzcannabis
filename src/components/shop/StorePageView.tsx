@@ -1,4 +1,3 @@
-import { notFound } from "next/navigation";
 import ShopHeader from "@/components/layout/ShopHeader";
 import HappyHourBanner, {
   CategoryCircles,
@@ -8,32 +7,10 @@ import HappyHourBanner, {
 } from "@/components/shop/ShopSections";
 import StoreInfoSection, { ReviewsSection, ShopFooter } from "@/components/shop/StoreInfo";
 import { categorySections, dealBanners } from "@/data/products";
-import { getAllStoreParams, getStoreBasePath, getStoreByRegionAndSlug } from "@/data/stores";
+import { getStoreBasePath } from "@/data/stores";
+import type { StoreLocation } from "@/types";
 
-type Props = {
-  params: Promise<{ region: string; storeSlug: string }>;
-};
-
-export function generateStaticParams() {
-  return getAllStoreParams();
-}
-
-export async function generateMetadata({ params }: Props) {
-  const { region, storeSlug } = await params;
-  const store = getStoreByRegionAndSlug(region, storeSlug);
-  if (!store) return { title: "Store | Gramz" };
-
-  const stateName = store.state === "MI" ? "Michigan" : "New York";
-  return {
-    title: `${store.city} ${stateName} Dispensary | Gramz Cannabis`,
-  };
-}
-
-export default async function StorePage({ params }: Props) {
-  const { region, storeSlug } = await params;
-  const store = getStoreByRegionAndSlug(region, storeSlug);
-  if (!store) notFound();
-
+export default function StorePageView({ store }: { store: StoreLocation }) {
   const storeBasePath = getStoreBasePath(store);
 
   return (
